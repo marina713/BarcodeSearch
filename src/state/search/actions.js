@@ -18,3 +18,10 @@ export const addToHistory = (value) => {
     payload: { value },
   };
 };
+
+export const setError = (value) => {
+  return {
+    type: "SET_ERROR",
+    payload: { value },
+  };
+};

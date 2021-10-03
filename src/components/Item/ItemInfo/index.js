@@ -1,15 +1,15 @@
 import React from "react";
-import { Label, RowContainer, Value } from "./styles";
+import { Label, RowContainer, Value, FirstCol, SecondCol } from "./styles";
 
-const ItemInfo = ({ label, value }) => {
+const ItemInfo = ({ label, value, small, column }) => {
   return value ? (
-    <RowContainer>
-      <div style={{ width: 90, textAlign: "end" }}>
-        <Label>{label}</Label>
-      </div>
-      <div style={{ width: "100%", marginLeft: 10, textAlign: "start" }}>
-        <Value>{value}</Value>
-      </div>
+    <RowContainer column={column}>
+      <FirstCol small={small}>
+        <Label small={small}>{label}</Label>
+      </FirstCol>
+      <SecondCol>
+        <Value small={small}>{value}</Value>
+      </SecondCol>
     </RowContainer>
   ) : null;
 };

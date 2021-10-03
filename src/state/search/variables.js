@@ -6,4 +6,5 @@ export const initialState = {
   barcode: "",
   historicalData: [],
   currentItem: {},
+  errorMsg: "",
 };

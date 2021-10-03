@@ -8,8 +8,8 @@ function App() {
         <HeaderContainer>
           <Heading>Search a Barcode</Heading>
         </HeaderContainer>
-        <Home />
       </Header>
+      <Home />
     </AppContainer>
   );
 }

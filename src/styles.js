@@ -4,7 +4,6 @@ import { colors } from "./utils/colors";
 export const AppContainer = styled.div`
   text-align: center;
   min-width: 60%;
-  background-color: whitesmoke;
   color: ${colors.black};
 
   @media only screen and (min-width: 730px) {
@@ -19,7 +18,6 @@ export const Heading = styled.h1`
 `;
 
 export const Header = styled.div`
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

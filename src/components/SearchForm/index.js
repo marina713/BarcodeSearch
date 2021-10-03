@@ -12,28 +12,28 @@ import {
 import { submitSearch } from "../../state/search/actions";
 import { useDispatch, useSelector } from "react-redux";
 // import { useTranslation } from "react-i18next";
-import Loading from "../Loading";
 import barcodeImg from "../../assets/barcode.svg";
+import barcodeErrorImg from "../../assets/barcodeError.png";
+// import { ReactComponent as Logo } from './logo.svg';
 
 function SearchForm({ loading, errorMsg }) {
   // const { t } = useTranslation();
   const dispatch = useDispatch();
   const barcode = useSelector((state) => state.search.barcode);
+  const selectedItem = useSelector((state) => state.search.selectedItem);
   const [inputText, setInputText] = useState(barcode);
-  // const advancedSearchQuery = useSelector(
-  //   (state) => state.search.advancedSearchQuery
-  // );
-  // const history = useHistory();
+
+  useEffect(() => {
+    setInputText("");
+  }, [selectedItem]);
 
   const handleSubmit = (e) => {
-    console.log({ inputText });
     e.preventDefault();
     if (!loading) {
       dispatch(submitSearch(inputText));
       setInputText("");
       e.target.reset();
     }
-    // history.push(`${searchText}?${advancedSearchQuery}`);
   };
 
   return (
@@ -42,17 +42,16 @@ function SearchForm({ loading, errorMsg }) {
         <SubTitle> Insert the barcode number: </SubTitle>
         <RowContainer>
           <div style={{ flexDirection: "column", display: "flex" }}>
-            <Image
-              src={barcodeImg}
-              alt={barcode}
-              isLoading={loading}
-              error={!!errorMsg}
-            />
             {errorMsg ? (
-              <span style={{ color: "indianred", fontSize: "small" }}>
-                {errorMsg}
-              </span>
-            ) : null}
+              <>
+                <Image alt={barcode} src={barcodeErrorImg} />
+                <span style={{ color: "indianred", fontSize: "small" }}>
+                  {errorMsg}
+                </span>
+              </>
+            ) : (
+              <Image alt={barcode} src={barcodeImg} isLoading={loading} />
+            )}
           </div>
 
           <InputContainer isLoading={loading}>
