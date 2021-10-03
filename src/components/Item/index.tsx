@@ -6,6 +6,7 @@ import IngredientsList from "../IngredientsList";
 import barcodeNoImg from "../../assets/barcodeNoImg.svg";
 import { setCurrentItem } from "../../state/search/actions";
 import { ProductItem } from "../../state/search/constants";
+import { getCurrentItem } from "../../state/search/selectors";
 
 type Props = {
   data: ProductItem,
@@ -14,7 +15,7 @@ type Props = {
 
 const Item = ({ data, isThumbnail }: Props) => {
   const dispatch = useDispatch();
-  const currentItem = useSelector((state) => state.search.currentItem);
+  const currentItem = useSelector(getCurrentItem);
 
   const handleClick = () => {
     if (isThumbnail) {
@@ -45,11 +46,12 @@ const Item = ({ data, isThumbnail }: Props) => {
         {!isThumbnail ? <ItemInfo label={"Brand"} value={data.brands} /> : null}
         <ItemInfo label={"Code"} value={data.code} small={isThumbnail} />
         {!isThumbnail ? (
-          <ItemInfo label={"Score"} value={data["nutrition-score-fr_100g"]} />
+          <ItemInfo label={"Score"} value={"nutrition-score-fr_100g"} />
         ) : null}
         {!isThumbnail && data.ingredients_text ? (
           <ItemInfo
             label={"Ingredients"}
+            /* @ts-ignore */
             value={
               <IngredientsList
                 ingredientsList={data.ingredients_text.split(",")}

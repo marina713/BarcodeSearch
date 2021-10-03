@@ -3,19 +3,19 @@ import { Label, RowContainer, Value, FirstCol, SecondCol } from "./styles";
 
 type Props = {
   label: string,
-  value: string,
+  value: string | undefined,
   small?: boolean,
   column?: boolean,
 };
 
 const ItemInfo = ({ label, value, small, column }: Props) => {
   return value ? (
-    <RowContainer column={column}>
-      <FirstCol small={small}>
-        <Label small={small}>{label}</Label>
+    <RowContainer column={!!column}>
+      <FirstCol small={!!small}>
+        <Label small={!!small}>{label}</Label>
       </FirstCol>
       <SecondCol>
-        <Value small={small}>{value}</Value>
+        <Value small={!!small}>{value}</Value>
       </SecondCol>
     </RowContainer>
   ) : null;

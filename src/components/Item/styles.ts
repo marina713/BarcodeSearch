@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
 
-export const RowContainer = styled.div`
+export const RowContainer = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -33,7 +33,7 @@ export const Value = styled.span`
   font-size: medium;
 `;
 
-export const ImgContainer = styled.div`
+export const ImgContainer = styled.div<any>`
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ export const ImgContainer = styled.div`
       : "  height: 150px; width: 150px;"}
 `;
 
-export const Img = styled.img`
+export const Img = styled.img<any>`
   border-radius: 5px;
   align-self: center;
   ${(props) =>

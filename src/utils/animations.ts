@@ -34,7 +34,7 @@ export const onHoverHighlight = css`
   transition: ease-in 0.2s;
 `;
 
-export const spin = (init, final) => keyframes`
+export const spin = (init: number, final: number) => keyframes`
   from {
     transform: rotate(${init}deg);
   }

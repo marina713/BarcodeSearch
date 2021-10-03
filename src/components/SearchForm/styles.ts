@@ -60,7 +60,7 @@ export const Input = styled.input`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<any>`
   display: inline-block;
   position: relative;
   filter: drop-shadow(0 1px ${colors.lightGray});
@@ -92,7 +92,7 @@ export const RowContainer = styled.div`
   align-items: flex-start;
 `;
 
-export const Image = styled.img`
+export const Image = styled.img<any>`
   height: 50px;
   align-self: center;
   margin: 0 10px;

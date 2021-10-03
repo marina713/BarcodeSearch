@@ -6,7 +6,7 @@ export type ProductItem = {
   brands?: string;
 };
 
-type StateProps = {
+export type StateProps = {
   barcode: string;
   historicalData: ProductItem[];
   currentItem: ProductItem;

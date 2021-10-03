@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { useHistory } from "react-router-dom";
 import {
   Form,
   Container,
@@ -10,11 +9,10 @@ import {
   Image,
 } from "./styles";
 import { submitSearch } from "../../state/search/actions";
+import { getBarcode } from "../../state/search/selectors";
 import { useDispatch, useSelector } from "react-redux";
-// import { useTranslation } from "react-i18next";
 import barcodeImg from "../../assets/barcode.svg";
 import barcodeErrorImg from "../../assets/barcodeError.png";
-// import { ReactComponent as Logo } from './logo.svg';
 
 type Props = {
   loading: boolean,
@@ -22,9 +20,9 @@ type Props = {
 };
 
 function SearchForm({ loading, errorMsg }: Props) {
-  // const { t } = useTranslation();
   const dispatch = useDispatch();
-  const barcode = useSelector((state) => state.search.barcode);
+  const barcode = useSelector(getBarcode);
+  // @ts-ignore
   const selectedItem = useSelector((state) => state.search.selectedItem);
   const [inputText, setInputText] = useState(barcode);
 
@@ -32,7 +30,7 @@ function SearchForm({ loading, errorMsg }: Props) {
     setInputText("");
   }, [selectedItem]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (!loading) {
       dispatch(submitSearch(inputText));

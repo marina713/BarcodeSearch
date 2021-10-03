@@ -10,6 +10,12 @@ import {
   setError,
 } from "../state/search/actions";
 import { ProductItem } from "../state/search/constants";
+import {
+  getBarcode,
+  getCurrentItem,
+  getHistoricalData,
+  getErrorMsg,
+} from "../state/search/selectors";
 
 const findItemInHistory = (historicalData: ProductItem[], barcode: string) =>
   historicalData.find((item) => item.code === barcode);
@@ -18,10 +24,10 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [hasPerformedSearch, setHasPerformedSearch] = useState(false);
 
-  const barcode = useSelector((state) => state.search.barcode);
-  const currentItem = useSelector((state) => state.search.currentItem);
-  const historicalData = useSelector((state) => state.search.historicalData);
-  const errorMsg = useSelector((state) => state.search.errorMsg);
+  const barcode = useSelector(getBarcode);
+  const currentItem = useSelector(getCurrentItem);
+  const historicalData = useSelector(getHistoricalData);
+  const errorMsg = useSelector(getErrorMsg);
 
   const dispatch = useDispatch();
 
@@ -38,7 +44,6 @@ const Home = () => {
         dispatch(setCurrentItem(data));
         dispatch(addToHistory(data));
       } else {
-        dispatch(setCurrentItem({}));
         dispatch(setError("No results found"));
       }
     },
@@ -54,6 +59,7 @@ const Home = () => {
       } else {
         let url = `https://world.openfoodfacts.org/api/v2/search?code=${barcode}&fields=code,product_name,image_url,ingredients_text,brands,categories_tags,nutrition-score-fr_100g,labels_tags`;
         setLoading(true);
+        // @ts-ignore
         axios(url, { crossdomain: true })
           .then((response) => handleResponse(response))
           .catch((error) => {
@@ -69,7 +75,7 @@ const Home = () => {
 
   return (
     <>
-      <SearchForm loading={loading} errorMsg={errorMessage} />
+      <SearchForm loading={loading} errorMsg={errorMessage || ""} />
       <div
         style={{
           display: "flex",
@@ -97,7 +103,7 @@ const Home = () => {
             maxWidth: 900,
           }}
         >
-          {historicalData.map((item) => (
+          {historicalData.map((item: ProductItem) => (
             <Item data={item} key={item.code} isThumbnail={true} />
           ))}
         </div>

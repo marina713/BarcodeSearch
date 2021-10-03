@@ -6,36 +6,54 @@ import {
   ADD_TO_HISTORY,
 } from "./constants";
 
-const searchReducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case SUBMIT_SEARCH:
-      return {
-        ...state,
-        barcode: action.payload.value,
-      };
+    case SUBMIT_SEARCH: {
+      const {
+        payload: { value },
+      } = action;
 
-    case SET_CURRENT_ITEM:
       return {
         ...state,
-        currentItem: action.payload.value,
+        barcode: value,
+      };
+    }
+
+    case SET_CURRENT_ITEM: {
+      const {
+        payload: { value },
+      } = action;
+
+      return {
+        ...state,
+        currentItem: value,
         errorMsg: "",
       };
+    }
 
-    case SET_ERROR:
+    case SET_ERROR: {
+      const {
+        payload: { value },
+      } = action;
+
       return {
         ...state,
-        errorMsg: action.payload.value,
+        currentItem: {},
+        errorMsg: value,
       };
+    }
 
-    case ADD_TO_HISTORY:
+    case ADD_TO_HISTORY: {
+      const {
+        payload: { value },
+      } = action;
+
       return {
         ...state,
         errorMsg: "",
-        historicalData: [action.payload.value, ...state.historicalData].slice(
-          0,
-          9
-        ),
+        historicalData: [value, ...state.historicalData].slice(0, 9),
       };
+    }
 
     default:
       return state;
