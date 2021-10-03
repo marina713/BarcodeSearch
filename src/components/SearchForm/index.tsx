@@ -16,7 +16,12 @@ import barcodeImg from "../../assets/barcode.svg";
 import barcodeErrorImg from "../../assets/barcodeError.png";
 // import { ReactComponent as Logo } from './logo.svg';
 
-function SearchForm({ loading, errorMsg }) {
+type Props = {
+  loading: boolean,
+  errorMsg: string,
+};
+
+function SearchForm({ loading, errorMsg }: Props) {
   // const { t } = useTranslation();
   const dispatch = useDispatch();
   const barcode = useSelector((state) => state.search.barcode);

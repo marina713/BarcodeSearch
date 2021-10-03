@@ -1,7 +1,14 @@
 import React from "react";
 import { Label, RowContainer, Value, FirstCol, SecondCol } from "./styles";
 
-const ItemInfo = ({ label, value, small, column }) => {
+type Props = {
+  label: string,
+  value: string,
+  small?: boolean,
+  column?: boolean,
+};
+
+const ItemInfo = ({ label, value, small, column }: Props) => {
   return value ? (
     <RowContainer column={column}>
       <FirstCol small={small}>

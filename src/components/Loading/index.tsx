@@ -1,7 +1,11 @@
 import React from "react";
 import barcode from "../../assets/barcode-scanner.gif";
 
-const Loading = ({ isLoading }) => {
+type Props = {
+  isLoading: boolean,
+};
+
+const Loading = ({ isLoading }: Props) => {
   return (
     isLoading && (
       <img

@@ -2,16 +2,20 @@ import React from "react";
 import Ingredient from "../Ingredient";
 import { Container } from "./styles";
 
-const IngredientsList = ({ ingredientsList }) => {
+type Props = {
+  ingredientsList: string[],
+};
+
+const IngredientsList = ({ ingredientsList }: Props) => {
   const numIngredients = ingredientsList.length;
 
   const ingredients =
     numIngredients > 0
       ? ingredientsList.map((ingredient, index) =>
-          ingredient !== "" ? (
-            <Ingredient key={index} id={index} ingredient={ingredient} />
-          ) : null
-        )
+        ingredient !== "" ? (
+          <Ingredient key={`${ingredient}-${index}`} ingredient={ingredient} />
+        ) : null
+      )
       : null;
 
   return <Container>{ingredients}</Container>;

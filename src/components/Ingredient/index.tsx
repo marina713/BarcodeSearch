@@ -1,7 +1,11 @@
 import React from "react";
 import { ListItem } from "./styles";
 
-const Ingredient = ({ ingredient }) => {
+type Props = {
+  ingredient: string,
+};
+
+const Ingredient = ({ ingredient }: Props) => {
   return <ListItem> {ingredient} </ListItem>;
 };
 
