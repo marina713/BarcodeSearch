@@ -13,7 +13,7 @@ type Props = {
   isThumbnail?: boolean,
 }
 
-const Item = ({ data, isThumbnail }: Props) => {
+const Item = React.memo(({ data, isThumbnail }: Props) => {
   const dispatch = useDispatch();
   const currentItem = useSelector(getCurrentItem);
 
@@ -63,6 +63,6 @@ const Item = ({ data, isThumbnail }: Props) => {
       </div>
     </RowContainer>
   );
-};
+});
 
 export default Item;

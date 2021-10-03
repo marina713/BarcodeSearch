@@ -19,7 +19,7 @@ type Props = {
   errorMsg: string,
 };
 
-function SearchForm({ loading, errorMsg }: Props) {
+const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   const dispatch = useDispatch();
   const barcode = useSelector(getBarcode);
   // @ts-ignore
@@ -70,6 +70,6 @@ function SearchForm({ loading, errorMsg }: Props) {
       </Container>
     </Form>
   );
-}
+});
 
 export default SearchForm;

@@ -8,7 +8,7 @@ type Props = {
   column?: boolean,
 };
 
-const ItemInfo = ({ label, value, small, column }: Props) => {
+const ItemInfo = React.memo(({ label, value, small, column }: Props) => {
   return value ? (
     <RowContainer column={!!column}>
       <FirstCol small={!!small}>
@@ -19,6 +19,6 @@ const ItemInfo = ({ label, value, small, column }: Props) => {
       </SecondCol>
     </RowContainer>
   ) : null;
-};
+});
 
 export default ItemInfo;

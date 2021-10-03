@@ -5,8 +5,8 @@ type Props = {
   ingredient: string,
 };
 
-const Ingredient = ({ ingredient }: Props) => {
+const Ingredient = React.memo(({ ingredient }: Props) => {
   return <ListItem> {ingredient} </ListItem>;
-};
+});
 
 export default Ingredient;

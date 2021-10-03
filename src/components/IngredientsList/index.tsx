@@ -6,19 +6,15 @@ type Props = {
   ingredientsList: string[],
 };
 
-const IngredientsList = ({ ingredientsList }: Props) => {
-  const numIngredients = ingredientsList.length;
+const IngredientsList = React.memo(({ ingredientsList }: Props) => {
+  const ingredients = ingredientsList.map((ingredient, index) =>
+    ingredient !== "" ? (
+      <Ingredient key={`${ingredient}-${index}`} ingredient={ingredient} />
+    ) : null
+  )
 
-  const ingredients =
-    numIngredients > 0
-      ? ingredientsList.map((ingredient, index) =>
-        ingredient !== "" ? (
-          <Ingredient key={`${ingredient}-${index}`} ingredient={ingredient} />
-        ) : null
-      )
-      : null;
 
   return <Container>{ingredients}</Container>;
-};
+});
 
 export default IngredientsList;
