@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-// import { useTranslation } from "react-i18next";
-// App Components
+
 import SearchForm from "../components/SearchForm";
 import Item from "../components/Item";
 import {
@@ -10,8 +9,9 @@ import {
   addToHistory,
   setError,
 } from "../state/search/actions";
+import { ProductItem } from "../state/search/constants";
 
-const findItemInHistory = (historicalData, barcode) =>
+const findItemInHistory = (historicalData: ProductItem[], barcode: string) =>
   historicalData.find((item) => item.code === barcode);
 
 const Home = () => {

@@ -5,8 +5,14 @@ import ItemInfo from "./ItemInfo";
 import IngredientsList from "../IngredientsList";
 import barcodeNoImg from "../../assets/barcodeNoImg.svg";
 import { setCurrentItem } from "../../state/search/actions";
+import { ProductItem } from "../../state/search/constants";
 
-const Item = ({ data, isThumbnail }) => {
+type Props = {
+  data: ProductItem,
+  isThumbnail?: boolean,
+}
+
+const Item = ({ data, isThumbnail }: Props) => {
   const dispatch = useDispatch();
   const currentItem = useSelector((state) => state.search.currentItem);
 
