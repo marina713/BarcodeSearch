@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Form,
   Container,
@@ -10,7 +10,7 @@ import {
   ImageBox,
   ErrorMessage,
 } from "./styles";
-import { submitSearch } from "../../state/search/actions";
+import { submitSearch, setError } from "../../state/search/actions";
 import { getBarcode, getCurrentItem } from "../../state/search/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import barcodeImg from "../../assets/barcode.svg";
@@ -21,11 +21,16 @@ type Props = {
   errorMsg: string,
 };
 
+const normaliseInput = (text: string) => text.replace(/\s/g, "");
+
+const isValidBarcode = (text: string) => !!text.match(/^\d+$/);
+
 const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   const dispatch = useDispatch();
   const barcode = useSelector(getBarcode);
   const currentItem = useSelector(getCurrentItem);
   const [inputText, setInputText] = useState(barcode);
+  const inputRef = useRef<any>();
 
   useEffect(() => {
     setInputText("");
@@ -34,9 +39,17 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (!loading) {
-      dispatch(submitSearch(inputText));
-      setInputText("");
-      e.target.reset();
+      const normalisedInput = normaliseInput(inputText);
+      const isValid = isValidBarcode(normalisedInput);
+      console.log({ normalisedInput, isValid })
+      if (isValid) {
+        dispatch(submitSearch(normalisedInput));
+        setInputText("");
+        e.target.reset();
+        inputRef.current && inputRef.current.blur();
+      } else {
+        dispatch(setError("Only numbers allowed"));
+      }
     }
   };
 
@@ -65,6 +78,7 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
               value={inputText}
               name="search"
               placeholder="e.g 2334561002236"
+              ref={inputRef}
             />
           </InputContainer>
         </RowContainer>

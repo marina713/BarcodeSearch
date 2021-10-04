@@ -20,32 +20,38 @@ const Item = React.memo(({ data }: Props) => {
   ]
   return (
     <ItemBox>
-      <h3>{data.product_name}</h3>
-      <RowContainer>
-        <ImgContainer>
-          {data.image_url ? (
-            <Img src={data.image_url} alt="product" />
-          ) : (
-            <Img src={barcodeNoImg} alt="no product" />
-          )}
-        </ImgContainer>
-        <div>
-          {ITEM_INFO.map(item => <ItemInfo
-            key={item.label}
-            label={item.label}
-            value={item.value}
-          />)}
 
-          {data.nutriments ?
-            <Nutriments /> : null}
+      {data.code ? (
+        <>
+          <h3>{data.product_name}</h3>
+          <RowContainer>
+            <ImgContainer>
+              {data.image_url ? (
+                <Img src={data.image_url} alt="product" />
+              ) : (
+                <Img src={barcodeNoImg} alt="no product" />
+              )}
+            </ImgContainer>
+            <div>
+              {ITEM_INFO.map(item => <ItemInfo
+                key={item.label}
+                label={item.label}
+                value={item.value}
+              />)}
 
-          {data.ingredients_text ? (
-            <IngredientsList
-              ingredientsList={data.ingredients_text.split(",")}
-            />
-          ) : null}
-        </div>
-      </RowContainer>
+              {data.nutriments ?
+                <Nutriments /> : null}
+
+              {data.ingredients_text ? (
+                <IngredientsList
+                  ingredientsList={data.ingredients_text.split(",")}
+                />
+              ) : null}
+            </div>
+          </RowContainer>
+        </>
+      ) : null}
+
     </ItemBox>
 
   );

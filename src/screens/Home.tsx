@@ -34,7 +34,6 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  //   const { t } = useTranslation();
   //   const code = "3263855093192";
   //   const code = "8410179012018";
   //   const code = "8437020652940";
@@ -43,7 +42,8 @@ const Home = () => {
   const handleResponse = useCallback(
     (response) => {
       setHasPerformedSearch(true);
-      const data = response.data.product;
+      const data = response?.data?.product;
+
       if (data && data.code !== "") {
         dispatch(setCurrentItem(data));
         dispatch(addToHistory(data));
@@ -63,9 +63,12 @@ const Home = () => {
         let url = `${API_ENDPOINT}product/${barcode}/?fields=code,product_name,image_url,ingredients_text,brands,categories_tags,nutrition-score-fr_100g,labels_tags,nutriments`;
         setLoading(true);
         axios(url)
-          .then((response) => handleResponse(response))
-          .catch(() => {
-            dispatch(setError("Network Error"));
+          .then((response) => {
+            return handleResponse(response)
+          })
+          .catch((e) => {
+            const errorMessage = e?.response?.status === 404 ? "No results found" : "Network Error";
+            dispatch(setError(errorMessage));
           })
           .finally(() => setLoading(false));
       }
@@ -79,7 +82,7 @@ const Home = () => {
       <SearchForm loading={loading} errorMsg={errorMessage || ""} />
       {historicalData ? (
         <FlexContainer>
-          {currentItem.code ? <Item data={currentItem} /> : null}
+          <Item data={currentItem} />
           <RecentSearches />
         </FlexContainer>
       ) : null}
