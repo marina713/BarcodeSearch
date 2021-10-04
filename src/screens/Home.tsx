@@ -69,6 +69,7 @@ const Home = () => {
           })
           .catch((e) => {
             const errorMessage = e?.response?.status === 404 ? "No results found" : "Network Error";
+            setHasPerformedSearch(true);
             dispatch(setError(errorMessage));
           })
           .finally(() => setLoading(false));

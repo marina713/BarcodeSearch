@@ -51,7 +51,7 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
       }
     }
   };
-
+  console.log({ errorMsg })
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
