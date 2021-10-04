@@ -7,9 +7,11 @@ import {
   InputContainer,
   RowContainer,
   Image,
+  ImageBox,
+  ErrorMessage,
 } from "./styles";
 import { submitSearch } from "../../state/search/actions";
-import { getBarcode } from "../../state/search/selectors";
+import { getBarcode, getCurrentItem } from "../../state/search/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import barcodeImg from "../../assets/barcode.svg";
 import barcodeErrorImg from "../../assets/barcodeError.png";
@@ -22,13 +24,12 @@ type Props = {
 const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   const dispatch = useDispatch();
   const barcode = useSelector(getBarcode);
-  // @ts-ignore
-  const selectedItem = useSelector((state) => state.search.selectedItem);
+  const currentItem = useSelector(getCurrentItem);
   const [inputText, setInputText] = useState(barcode);
 
   useEffect(() => {
     setInputText("");
-  }, [selectedItem]);
+  }, [currentItem]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -42,20 +43,20 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
-        <SubTitle> Insert the barcode number: </SubTitle>
+        <SubTitle>Insert the barcode number:</SubTitle>
         <RowContainer>
-          <div style={{ flexDirection: "column", display: "flex" }}>
+          <ImageBox>
             {errorMsg ? (
               <>
                 <Image alt={barcode} src={barcodeErrorImg} />
-                <span style={{ color: "indianred", fontSize: "small" }}>
+                <ErrorMessage>
                   {errorMsg}
-                </span>
+                </ErrorMessage>
               </>
             ) : (
               <Image alt={barcode} src={barcodeImg} isLoading={loading} />
             )}
-          </div>
+          </ImageBox>
 
           <InputContainer isLoading={loading}>
             <Input

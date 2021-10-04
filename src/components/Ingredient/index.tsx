@@ -1,12 +1,10 @@
 import React from "react";
 import { ListItem } from "./styles";
 
-type Props = {
+export type Props = {
   ingredient: string,
 };
 
-const Ingredient = React.memo(({ ingredient }: Props) => {
-  return <ListItem> {ingredient} </ListItem>;
-});
+const Ingredient = React.memo(({ ingredient }: Props) => ingredient ? <ListItem> {ingredient} </ListItem> : null);
 
 export default Ingredient;

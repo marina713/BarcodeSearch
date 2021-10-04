@@ -5,12 +5,11 @@ type Props = {
   label: string,
   value: string | undefined,
   small?: boolean,
-  column?: boolean,
 };
 
-const ItemInfo = React.memo(({ label, value, small, column }: Props) => {
+const ItemInfo = React.memo(({ label, value, small }: Props) => {
   return value ? (
-    <RowContainer column={!!column}>
+    <RowContainer>
       <FirstCol small={!!small}>
         <Label small={!!small}>{label}</Label>
       </FirstCol>

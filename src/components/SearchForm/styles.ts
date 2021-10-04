@@ -92,6 +92,16 @@ export const RowContainer = styled.div`
   align-items: flex-start;
 `;
 
+export const ImageBox = styled.div`
+  flex-direction: column;
+  display: flex;
+`;
+
+export const ErrorMessage = styled.span`
+  color: indianred;
+  font-size: small;
+`;
+
 export const Image = styled.img<any>`
   height: 50px;
   align-self: center;

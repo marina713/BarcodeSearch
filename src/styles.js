@@ -6,7 +6,7 @@ export const AppContainer = styled.div`
   min-width: 60%;
   color: ${colors.black};
 
-  @media only screen and (min-width: 730px) {
+  @media only screen and (min-width: 830px) {
     .search {
       width: max-content;
     }

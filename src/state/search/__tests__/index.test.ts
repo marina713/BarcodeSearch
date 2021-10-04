@@ -21,7 +21,7 @@ describe("Search #reducer", () => {
 
   it("returns state for `setCurrentItem` action", () => {
     const result = reducer(initialState, actions.setCurrentItem(productMock));
-    expect(result.barcode).toStrictEqual("");
+    expect(result.barcode).toStrictEqual(productMock.code);
     expect(result.historicalData).toStrictEqual([]);
     expect(result.currentItem).toStrictEqual(productMock);
     expect(result.errorMsg).toStrictEqual("");

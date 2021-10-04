@@ -4,6 +4,7 @@ import axios from "axios";
 
 import SearchForm from "../components/SearchForm";
 import Item from "../components/Item";
+import RecentSearches from "../components/RecentSearches";
 import {
   setCurrentItem,
   addToHistory,
@@ -16,6 +17,8 @@ import {
   getHistoricalData,
   getErrorMsg,
 } from "../state/search/selectors";
+import { API_ENDPOINT } from '../constants';
+import { FlexContainer } from "./styles"
 
 const findItemInHistory = (historicalData: ProductItem[], barcode: string) =>
   historicalData.find((item) => item.code === barcode);
@@ -36,10 +39,11 @@ const Home = () => {
   //   const code = "8410179012018";
   //   const code = "8437020652940";
   //   const code = "20425555";
+
   const handleResponse = useCallback(
     (response) => {
       setHasPerformedSearch(true);
-      const data = response.data.products[0];
+      const data = response.data.product;
       if (data && data.code !== "") {
         dispatch(setCurrentItem(data));
         dispatch(addToHistory(data));
@@ -51,20 +55,17 @@ const Home = () => {
   );
 
   useEffect(() => {
-    console.log({ barcode });
     if (barcode !== "") {
       const itemInHistory = findItemInHistory(historicalData, barcode);
       if (itemInHistory) {
         dispatch(setCurrentItem(itemInHistory));
       } else {
-        let url = `https://world.openfoodfacts.org/api/v2/search?code=${barcode}&fields=code,product_name,image_url,ingredients_text,brands,categories_tags,nutrition-score-fr_100g,labels_tags`;
+        let url = `${API_ENDPOINT}product/${barcode}/?fields=code,product_name,image_url,ingredients_text,brands,categories_tags,nutrition-score-fr_100g,labels_tags,nutriments`;
         setLoading(true);
-        // @ts-ignore
-        axios(url, { crossdomain: true })
+        axios(url)
           .then((response) => handleResponse(response))
-          .catch((error) => {
+          .catch(() => {
             dispatch(setError("Network Error"));
-            console.log("Error fetching and parsing data", error);
           })
           .finally(() => setLoading(false));
       }
@@ -76,38 +77,12 @@ const Home = () => {
   return (
     <>
       <SearchForm loading={loading} errorMsg={errorMessage || ""} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        {currentItem.code ? <Item data={currentItem} /> : null}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            maxWidth: 900,
-          }}
-        >
-          {historicalData.map((item: ProductItem) => (
-            <Item data={item} key={item.code} isThumbnail={true} />
-          ))}
-        </div>
-      </div>
+      {historicalData ? (
+        <FlexContainer>
+          {currentItem.code ? <Item data={currentItem} /> : null}
+          <RecentSearches />
+        </FlexContainer>
+      ) : null}
     </>
   );
 };

@@ -14,24 +14,31 @@ export const ItemBox = styled.div`
   }
 `;
 
-export const RowContainer = styled.div`
+export const RowContainer = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  min-width: 300px;
-  max-width: 500px;
-  border: 1px solid #00bcd4;
+  border: 1px solid ${colors.lightGray};
   border-radius: 15px;
-  padding: 10px;
-  margin: 3px;
-  margin-right: 40px;
   overflow-wrap: anywhere;
-  line-height: 1.5;
+  cursor: pointer;
+  filter: grayscale(1);
+  min-width: 180px;
+  max-width: 220px;
+  padding: 5px;
+  margin: 3px;
+  height: 80px;
+  overflow: hidden;
+  line-height: 1;
+  ${(props) =>
+    props.selected ? "filter: grayscale(0); border-color:#00bcd4;" : null}
+  &&:hover {
+    filter: grayscale(0.3);
+  }
 
   @media only screen and (max-width: 830px) {
     margin: 5px 20px;
-    flex-direction: column;
   }
 `;
 
@@ -46,17 +53,13 @@ export const ImgContainer = styled.div`
   flex-direction: column;
   padding: 10px;
   justify-content: flex-start;
-  max-height: 150px;
-  max-width: 150px;
-
-  @media only screen and (max-width: 830px) {
-    align-self: center;
-  }
+  height: 70px;
+  width: 70px;
 `;
 
 export const Img = styled.img`
   border-radius: 5px;
   align-self: center;
-  max-height: 150px;
-  max-width: 150px;
+  max-height: 70px;
+  max-width: 70px;
 `;

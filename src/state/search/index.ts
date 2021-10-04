@@ -12,7 +12,6 @@ const searchReducer = (state = initialState, action: any) => {
       const {
         payload: { value },
       } = action;
-
       return {
         ...state,
         barcode: value,
@@ -23,11 +22,11 @@ const searchReducer = (state = initialState, action: any) => {
       const {
         payload: { value },
       } = action;
-
       return {
         ...state,
         currentItem: value,
         errorMsg: "",
+        barcode: value.code,
       };
     }
 
@@ -35,7 +34,6 @@ const searchReducer = (state = initialState, action: any) => {
       const {
         payload: { value },
       } = action;
-
       return {
         ...state,
         currentItem: {},
@@ -47,7 +45,6 @@ const searchReducer = (state = initialState, action: any) => {
       const {
         payload: { value },
       } = action;
-
       return {
         ...state,
         errorMsg: "",
