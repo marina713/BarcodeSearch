@@ -55,7 +55,8 @@ export const ImgContainer = styled.div`
 `;
 
 export const Img = styled.img`
-  border-radius: 5px;
+  border-radius: 15px;
+  margin-right: 5px;
   align-self: center;
   max-height: 150px;
   max-width: 150px;

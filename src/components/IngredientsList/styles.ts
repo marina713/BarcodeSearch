@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 
 export const Container = styled.ul`
-  max-height: 150px;
-  overflow: scroll;
   text-align: center;
   list-style: none;
   padding-inline-start: 0;

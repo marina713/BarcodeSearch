@@ -35,6 +35,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   //   const code = "3263855093192";
+  //   const code = "041164000314"; no foto
   //   const code = "8410179012018";
   //   const code = "8437020652940";
   //   const code = "20425555";

@@ -28,7 +28,6 @@ export const RowContainer = styled.div<any>`
   max-width: 220px;
   padding: 5px;
   margin: 3px;
-  height: 80px;
   overflow: hidden;
   line-height: 1;
   ${(props) =>
@@ -51,7 +50,7 @@ export const ImgContainer = styled.div`
   align-self: flex-start;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 5px;
   justify-content: flex-start;
   height: 70px;
   width: 70px;

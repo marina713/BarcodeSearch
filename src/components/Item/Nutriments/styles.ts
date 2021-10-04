@@ -4,9 +4,9 @@ import { colors } from "../../../utils/colors";
 export const Label = styled.span<any>`
   color: ${colors.lightBlack};
   font-weight: 200;
-  margin-bottom: 3px;
   text-align: left;
   font-size: ${(props) => (props.small ? "small" : "medium")};
+  padding-left: ${(props) => (props.subCategory ? "15px" : null)};
 `;
 
 export const Wrapper = styled.div`
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
   margin-top: 13px;
 `;
 
-export const NutrimentWrapper = styled.div`
+export const NutrimentWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

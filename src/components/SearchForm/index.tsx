@@ -41,7 +41,6 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
     if (!loading) {
       const normalisedInput = normaliseInput(inputText);
       const isValid = isValidBarcode(normalisedInput);
-      console.log({ normalisedInput, isValid })
       if (isValid) {
         dispatch(submitSearch(normalisedInput));
         setInputText("");

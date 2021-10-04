@@ -45,11 +45,16 @@ const searchReducer = (state = initialState, action: any) => {
       const {
         payload: { value },
       } = action;
-      return {
-        ...state,
-        errorMsg: "",
-        historicalData: [value, ...state.historicalData].slice(0, 9),
-      };
+      const isInHistory = state.historicalData.find(
+        (item) => item.code === value.code
+      );
+      return !isInHistory
+        ? {
+            ...state,
+            errorMsg: "",
+            historicalData: [value, ...state.historicalData].slice(0, 9),
+          }
+        : state;
     }
 
     default:
