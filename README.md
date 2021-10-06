@@ -31,8 +31,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
  - [x] Persists recent searches after page is refreshed
  - [x] Handling items without image
  - [x] Auto-scroll to top when item is searched
- - [x] Loading mode
- - [x] Test
+ - [x] Loading mode when an item is being searched
+ - [x] Unit tests covering state logic and a sample component
 
 ## Demo
 ![BarcodeSearch-web2](https://user-images.githubusercontent.com/33632044/136274995-9b958758-8d83-443a-84d9-b95cac1aaf06.gif)
