@@ -18,11 +18,17 @@ const testComponent = (props: Props) => {
 describe("<Header />", () => {
   it("renders correctly with default props", () => {
     const tree = testComponent(initialProps).toJSON();
-    expect(tree).toMatchInlineSnapshot();
+    expect(tree).toMatchInlineSnapshot(`
+      <ListItem>
+         
+        Red pepper
+         
+      </ListItem>
+    `);
   });
 
   it("renders correctly with an empty ingredient", () => {
     const tree = testComponent({ ...initialProps, ingredient: "" }).toJSON();
-    expect(tree).toMatchInlineSnapshot();
+    expect(tree).toMatchInlineSnapshot(`null`);
   });
 });

@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import { composeWithDevTools } from "redux-devtools-extension";
 import storage from "redux-persist/lib/storage";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
@@ -19,10 +21,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 const store = createStore(
   persistedReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk))
 );
 const persistor = persistStore(store);
-//persistor.purge();
 
 ReactDOM.render(
   <React.StrictMode>

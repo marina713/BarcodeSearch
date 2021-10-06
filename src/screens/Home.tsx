@@ -17,7 +17,7 @@ import {
   getHistoricalData,
   getErrorMsg,
 } from "../state/search/selectors";
-import { API_ENDPOINT } from '../constants';
+import { API_ENDPOINT, errorMessages } from '../constants';
 import { FlexContainer } from "./styles"
 
 const findItemInHistory = (historicalData: ProductItem[], barcode: string) =>
@@ -34,12 +34,6 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  //   const code = "3263855093192";
-  //   const code = "041164000314"; no foto
-  //   const code = "8410179012018";
-  //   const code = "8437020652940";
-  //   const code = "20425555";
-
   const handleResponse = useCallback(
     (response) => {
       setHasPerformedSearch(true);
@@ -49,7 +43,7 @@ const Home = () => {
         dispatch(setCurrentItem(data));
         dispatch(addToHistory(data));
       } else {
-        dispatch(setError("No results found"));
+        dispatch(setError(errorMessages.BARCODE_NOT_FOUND));
       }
     },
     [dispatch]
@@ -68,7 +62,7 @@ const Home = () => {
             return handleResponse(response)
           })
           .catch((e) => {
-            const errorMessage = e?.response?.status === 404 ? "No results found" : "Network Error";
+            const errorMessage = e?.response?.status === 404 ? errorMessages.BARCODE_NOT_FOUND : errorMessages.NETWORK_ERROR;
             setHasPerformedSearch(true);
             dispatch(setError(errorMessage));
           })

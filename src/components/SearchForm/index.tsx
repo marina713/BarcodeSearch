@@ -15,15 +15,13 @@ import { getBarcode, getCurrentItem } from "../../state/search/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import barcodeImg from "../../assets/barcode.svg";
 import barcodeErrorImg from "../../assets/barcodeError.png";
+import { errorMessages } from "../../constants";
+import { normaliseInput, isValidBarcode } from '../../utils/search';
 
 type Props = {
   loading: boolean,
   errorMsg: string,
 };
-
-const normaliseInput = (text: string) => text.replace(/\s/g, "");
-
-const isValidBarcode = (text: string) => !!text.match(/^\d+$/);
 
 const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
   const dispatch = useDispatch();
@@ -47,11 +45,11 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
         e.target.reset();
         inputRef.current && inputRef.current.blur();
       } else {
-        dispatch(setError("Only numbers allowed"));
+        dispatch(setError(errorMessages.ONLY_NUMBERS));
       }
     }
   };
-  console.log({ errorMsg })
+
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
