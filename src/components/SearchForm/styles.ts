@@ -40,17 +40,13 @@ export const Input = styled.input`
     transition: 0.1 150ms ease-out;
   }
 
-  &:focus::placeholder {
-    opacity: 0.5;
-  }
-
   &:not(:placeholder-shown) {
     width: 235px;
   }
 
   &:focus {
     width: 200px;
-    border-color: inherit;
+    opacity: 0.8;
   }
 
   @media only screen and (min-width: 730px) {
@@ -95,6 +91,7 @@ export const RowContainer = styled.div`
 export const ImageBox = styled.div`
   flex-direction: column;
   display: flex;
+  height: 60px;
 `;
 
 export const ErrorMessage = styled.span`

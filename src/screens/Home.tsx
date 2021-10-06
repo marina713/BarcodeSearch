@@ -55,7 +55,7 @@ const Home = () => {
       if (itemInHistory) {
         dispatch(setCurrentItem(itemInHistory));
       } else {
-        let url = `${API_ENDPOINT}product/${barcode}/?fields=code,product_name,image_url,ingredients_text,brands,categories_tags,nutrition-score-fr_100g,labels_tags,nutriments`;
+        let url = `${API_ENDPOINT}product/${barcode}/?fields=code,product_name,image_url,ingredients_text,brands,categories_tags,labels_tags,nutriments`;
         setLoading(true);
         axios(url)
           .then((response) => {

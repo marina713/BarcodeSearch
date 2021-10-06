@@ -16,7 +16,6 @@ const Item = React.memo(({ data }: Props) => {
     { label: "Name", value: data.product_name },
     { label: "Brand", value: data.brands },
     { label: "Code", value: data.code },
-    { label: "Score", value: data["nutrition-score-fr_100g"] },
   ]
   return (
     <ItemBox>

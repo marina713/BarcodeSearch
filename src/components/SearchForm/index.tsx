@@ -50,6 +50,10 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
     }
   };
 
+  const handleBlur = () => {
+    dispatch(setError(""));
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Container>
@@ -72,6 +76,7 @@ const SearchForm = React.memo(({ loading, errorMsg }: Props) => {
             <Input
               type="search"
               onChange={(e) => setInputText(e.target.value)}
+              onBlur={handleBlur}
               value={inputText}
               name="search"
               placeholder="e.g 2334561002236"

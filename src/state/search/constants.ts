@@ -4,7 +4,6 @@ export type ProductItem = {
   image_url?: string;
   product_name?: string;
   brands?: string;
-  "nutrition-score-fr_100g"?: string;
   nutriments?: object;
 };
 
