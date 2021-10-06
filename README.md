@@ -13,10 +13,10 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
-# Features
+## Features
  - [x] Search a barcode using the Search Input
  - [x] If barcode has been searched previously, is retrieved from Recent Searches
- - [x] Product detailed information is displayed on the screen. Information shown:
+ - [x] Product detailed information is displayed on the screen:
     - [x] Product name
     - [x] Product brand
     - [x] Product barcode (code)
@@ -32,7 +32,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
  - [x] Handling items without image
  - [x] Auto-scroll to top when item is searched
  - [x] Loading mode
+ - [x] Test
 
-# Demo
+## Demo
 ![BarcodeSearch-web2](https://user-images.githubusercontent.com/33632044/136274995-9b958758-8d83-443a-84d9-b95cac1aaf06.gif)
+
+## Testing
+
+In the project directory, you can run the unit test using the following command:
+
+```
+> yarn jest
+```
+
+## Improvements
+
+ - [ ] URL to sync with the searched barcode
+ - [ ] Translation
+ - [ ] Automated tests
+ - [ ] Create Storybook
+ - [ ] Improve ingredients parsing method
+ - [ ] Test unit areas to cover all of the Components
+
+
 
